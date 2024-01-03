@@ -1,0 +1,70 @@
+{%extends 'main.html'%}
+
+{%block content%}
+
+<style>
+    .home-container {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+
+    <div class="home-container">
+        <div>
+            <h2>Browse Cities</h3>
+            <hr>
+            <div>
+                <h3><a href="{% url 'home' %}">All</a></h3>
+
+            </div>
+            {% for room in rooms%}
+
+            <div>
+                <h3><a href="{% url 'home' %}?q={{room.city}}">{{room.city}}</a></h3>
+
+            </div>
+
+            {%endfor%} 
+
+
+        
+        
+
+        </div>
+
+        <div>
+            <h5>{{room_count}} Posts Till now</h5>
+            <h3><a href="{% url 'createroom' %}">Create Post</a></h3>
+            
+            {%for room in rooms%}
+            <div>
+                {% if request.user == room.host%}
+                <h2><a href="{%url 'updateroom' room.id%}">Edit</a> <a href="{%url 'deleteroom' room.id%}"> Delete</a</h2>
+                    <br>
+                    <br>
+                {%endif%}
+                <span>@{{room.host.username}}</span>
+                <h3>--<a href="{% url 'room' room.id %}">{{room.title}}</a></h2>
+                <h5>{{room.created|timesince}} ago</h5>
+                <h4>{{room.location}}, {{room.city}}</h4>
+                <hr>
+            </div>
+            {%endfor%}
+        </div>
+
+        <div>
+            <h2>Categories</h2>
+            {% for category in categories %}
+                <div>
+                    <h3><a href="{% url 'home' %}?q={{category}}">{{ category }}</a></h3>
+                    
+                </div>
+            {% endfor %}
+        </div>
+        
+        </div>
+
+        
+
+
+{%endblock%}
