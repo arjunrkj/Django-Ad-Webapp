@@ -72,14 +72,24 @@
           <h2 class="auth__tagline"></h2>
 
 
-          {% for field in form%}
           <form class="form" action="" method="POST">
-            {%csrf_token%}
-            <div class="form__group form__group">
-              <label for="room_name">{{field.label}}</label>
-              {{field}}
-            </div>
-            {%endfor%}
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form__group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.name == 'username' %}
+                        {% for error in field.errors %}
+                            <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    {% elif field.name == 'password1' %}
+                        {% for error in field.errors %}
+                            <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        
             <button class="btn btn--main" type="submit">
               <svg
                 version="1.1"

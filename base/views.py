@@ -8,6 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from .models import Room
 from .forms import RoomForm
+from .forms import UserRegistrationForm
+
 # Create your views here.
 rooms=[
     {'id':1, 'name':'lets learn python'},
@@ -51,10 +53,10 @@ def logoutuser(request):
     return redirect('home')
 
 def registeruser(request):
-    form = UserCreationForm()
+    form = UserRegistrationForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
 
         if form.is_valid():
             user = form.save(commit=False)
@@ -66,7 +68,7 @@ def registeruser(request):
         else:
             messages.error(request,'Error in Registration,Try again!')
 
-    return render(request,'base/loginpage.html',{'form':form})
+    return render(request,'base/loginpage.html',{'form':form}) 
 
 
 
