@@ -1,8 +1,8 @@
 <header class="header header--loggedIn">
     <div class="container">
       <a href="{% url 'home' %}" class="header__logo">
-        <img src="assets/logo.svg" />
-        <h1>KnoFlow</h1>
+        <img src="static/images/icon.png"/>
+        <h1>Garuda</h1>
       </a>
       <form class="header__search" method="GET" action="{% url 'home' %}">
         <label>
@@ -21,10 +21,6 @@
         <!-- Logged In -->
         {%if request.user.is_authenticated %}
         <div class="header__user">
-          <a href="profile.html">
-            <div class="avatar avatar--medium active">
-              <img src="https://randomuser.me/api/portraits/men/6.jpg" />
-            </div>
             <p><!--name--><span>@{{request.user}}</span></p>
           </a>
           <button class="dropdown-button">
@@ -39,7 +35,12 @@
 
         <!-- Not Logged In -->
         <a href="{% url 'login' %}">
-          <img src="./assets/avatar.svg" />
+
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>login</title>
+            <path d="M30.656 14.342l-12-12c-0.391-0.391-1.023-0.391-1.414 0s-0.391 1.023 0 1.414l10.293 10.293h-23.586c-0.553 0-1 0.447-1 1s0.447 1 1 1h23.586l-10.293 10.293c-0.391 0.391-0.391 1.023 0 1.414 0.195 0.195 0.451 0.293 0.707 0.293s0.512-0.098 0.707-0.293l12-12c0.391-0.391 0.391-1.023 0-1.414z"></path>
+          </svg>
+          
           <p>Login</p>
         </a>
 
