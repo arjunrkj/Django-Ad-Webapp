@@ -6,8 +6,8 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
-from .models import Room
-from .forms import RoomForm
+from .models import Post
+from .forms import PostForm
 from .forms import UserRegistrationForm
 
 # Create your views here.
@@ -75,7 +75,7 @@ def registeruser(request):
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    rooms=Room.objects.filter(
+    posts=Post.objects.filter(
         Q(city__icontains=q) | 
         Q(title__icontains=q) | 
         Q(location__icontains=q) |
@@ -88,45 +88,45 @@ def home(request):
 
     )
 
-    room_count = rooms.count()
+    post_count = posts.count()
     flag = True
     categories = ['Gigs','Rentals','Events','Jobs','News','Meetings','Services','For sale','Activity Partner']
     statelist = ['Kerala','Tamil Nadu','Karnataka','New Delhi']
-    context = {'rooms': rooms,'room_count':room_count,'categories': categories,'statelist':statelist,'flag':flag} 
+    context = {'posts': posts,'post_count':post_count,'categories': categories,'statelist':statelist,'flag':flag} 
     return render(request,'base/home.html',context)
 
-def room(request,pk):
-    room = Room.objects.get(id=pk)      
+def post(request,pk):
+    post = Post.objects.get(id=pk)      
  
-    context = {'room':room}
+    context = {'room':post}
 
-    return render(request,'base/room.html',context)
+    return render(request,'base/post.html',context)
 
 
 @login_required(login_url='login')
-def createRoom(request):
+def createPost(request):
 
-    form = RoomForm   
+    form = PostForm
     if request.method == 'POST':
-        form = RoomForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
-            room = form.save()
-            room.host = request.user
+            post = form.save()
+            post.host = request.user
             
-            room.save()
+            post.save()
             return redirect('home')
         
     context = {'form':form}
-    return render(request,'base/roomform.html',context)
+    return render(request,'base/postform.html',context)
 
 
-def updateRoom(request,pk):
+def updatePost(request,pk):
 
-    room = Room.objects.get(id=pk)
-    form = RoomForm(instance=room)
+    post = Post.objects.get(id=pk)
+    form = PostForm(instance=post)
 
     if request.method == 'POST':
-        form = RoomForm(request.POST,instance=room)
+        form = PostForm(request.POST,instance=post)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -135,23 +135,23 @@ def updateRoom(request,pk):
     return render(request,'base/roomform.html',context)
 
 #@login_required('loginu')
-def deleteRoom(request,pk):
-     room= Room.objects.get(id=pk)
+def deletePost(request,pk):
+     post = Post.objects.get(id=pk)
      if request.method == 'POST':
-         room.delete()
+         post.delete()
          return redirect('home')
      
-     return render(request, 'base/delete.html',{'obj':room})
+     return render(request, 'base/delete.html',{'obj':post})
 
         
 def myposts(request):
 
     if request.method == 'GET':
-        room = Room.objects.filter(host=request.user)
+        post = Post.objects.filter(host=request.user)
         categories = ['Gigs','Rentals','Events','Jobs','News','Meetings','Services','For sale','Activity Partner']
         statelist = ['Kerala','Tamil Nadu','Karnataka','New Delhi']
         flag = False
-        context = {'rooms': room,'categories': categories,'statelist':statelist,'flag':flag} 
+        context = {'posts': post,'categories': categories,'statelist':statelist,'flag':flag} 
         return render(request,'base/home.html',context)
 
 

@@ -22,30 +22,30 @@
           <div class="room__box scroll">
             <div class="room__header scroll">
               <div class="room__info">
-                <h3>{{room.title}}</h3>
-                <span>{{room.created|timesince}} ago</span>
+                <h3>{{post.title}}</h3>
+                <span>{{post.created|timesince}} ago</span>
               </div>
               <div class="room__hosted">
                 <p>Posted By</p>
-                  <span>@{{room.host}}</span>
+                  <span>@{{post.host}}</span>
                 
               </div>
               <div class="room__details">
-                {{room.description}}
+                {{post.description}}
                 
               </div>
-              {% if room.location %}
-              <span class="room__topics">{{room.location}},{{room.city}}</span>
+              {% if post.location %}
+              <span class="room__topics">{{post.location}},{{post.city}}</span>
               {% else %}
-              <span class="room__topics">{{room.city}}</span>
+              <span class="room__topics">{{post.city}}</span>
               {%endif%}
-              {% if room.contact|slice:"-10:" == '@gmail.com' %}
+              {% if post.contact|slice:"-10:" == '@gmail.com' %}
               <span class="room__topics">
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{room.contact}}" target="_blank">{{room.contact}}</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{room.contact}}" target="_blank">{{post.contact}}</a>
               </span>
             {%else%}
             <span class="room__topics">
-              <a>{{room.contact}}</a>
+              <a>{{post.contact}}</a>
           </span>
           {%endif%}
 

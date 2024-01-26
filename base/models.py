@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Room(models.Model):
+class Post(models.Model):
     category = models.CharField(null=True,max_length=50,default='')
     host = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
     #topic

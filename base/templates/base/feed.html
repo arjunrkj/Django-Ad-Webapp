@@ -1,22 +1,22 @@
-{%for room in rooms%}
+{%for post in posts%}
 <div class="roomListRoom">
     <div class="roomListRoom__header">
       <a href="profile.html" class="roomListRoom__author">
         <!-- <div class="avatar avatar--small active">
           <img src="https://randomuser.me/api/portraits/men/11.jpg" />
         </div> -->
-        <span>@{{room.host.username}}</span>
+        <span>@{{post.host.username}}</span>
       </a>
       <div class="roomListRoom__actions">
-        {% if request.user == room.host%}
-        <span><a href="{%url 'updateroom' room.id%}">Edit</a> <a href="{%url 'deleteroom' room.id%}"> Delete</a></span>
+        {% if request.user == post.host%}
+        <span><a href="{%url 'updatepost' post.id%}">Edit</a> <a href="{%url 'deletepost' post.id%}"> Delete</a></span>
         {%endif%}
       </div>
     </div>
     <div class="roomListRoom__content">
-      <a href="{% url 'room' room.id %}">{{room.title}}</a>
+      <a href="{% url 'post' post.id %}">{{post.title}}</a>
       <p>
-        {{room.description}}
+        {{post.description}}
       </p>
     </div>
     <div class="roomListRoom__meta">
@@ -25,30 +25,16 @@
             <path d="M12 2C8.139 2 5 5.139 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.861-3.139-7-7-7zm0 9.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
         </svg>        
-        {% if room.location %}
-        {{room.location}}, {{room.city}}
+        {% if post.location %}
+        {{post.location}}, {{post.city}}
         {%else%}
-        {{room.city}}
+        {{post.city}}
         {%endif%}
 
       </a>
-      <p class="roomListRoom__topic">{{room.created|timesince}} ago</p>
+      <p class="roomListRoom__topic">{{post.created|timesince}} ago</p>
     </div>
 </div>
 
 {%endfor%}
 
-<!-- {%for room in rooms%}
-<div>
-    {% if request.user == room.host%}
-    <h2><a href="{%url 'updateroom' room.id%}">Edit</a> <a href="{%url 'deleteroom' room.id%}"> Delete</a></h2>
-        <br>
-        <br>
-    {%endif%}
-    <span>@{{room.host.username}}</span>
-    <h3>--<a href="{% url 'room' room.id %}">{{room.title}}</a></h2>
-    <h5>{{room.created|timesince}} ago</h5>
-    <h4>{{room.location}}, {{room.city}}</h4>
-    <hr>
-</div>
-{%endfor%} -->
