@@ -41,8 +41,8 @@
               {%endif%}
               {% if post.contact|slice:"-10:" == '@gmail.com' %}
               <span class="room__topics">
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{room.contact}}" target="_blank">{{post.contact}}</a>
-              </span>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{post.contact}}" target="_blank">{{post.contact}}</a>
+
             {%else%}
             <span class="room__topics">
               <a>{{post.contact}}</a>

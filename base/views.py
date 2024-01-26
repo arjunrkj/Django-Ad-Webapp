@@ -98,7 +98,7 @@ def home(request):
 def post(request,pk):
     post = Post.objects.get(id=pk)      
  
-    context = {'room':post}
+    context = {'post':post}
 
     return render(request,'base/post.html',context)
 
@@ -132,7 +132,7 @@ def updatePost(request,pk):
             return redirect('home')
     
     context = {'form':form}
-    return render(request,'base/roomform.html',context)
+    return render(request,'base/postform.html',context)
 
 #@login_required('loginu')
 def deletePost(request,pk):
