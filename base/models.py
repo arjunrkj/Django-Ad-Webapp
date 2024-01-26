@@ -13,7 +13,7 @@ class Room(models.Model):
     description = models.TextField(null=True, blank=True)
     location = models.CharField(null=True, max_length=200,default='')
     city = models.CharField(null=True, max_length=200)
-    district = models.CharField(null=True, max_length=200)
+    # image = models.ImageField(upload_to='image')
     state = models.CharField(null=True, max_length=200)
     #keywords
     contact = models.TextField(null=False)  
