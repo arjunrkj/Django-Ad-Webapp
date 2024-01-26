@@ -15,6 +15,7 @@ class Room(models.Model):
     city = models.CharField(null=True, max_length=200)
     # image = models.ImageField(upload_to='image')
     state = models.CharField(null=True, max_length=200)
+    
     #keywords
     contact = models.TextField(null=False)  
     updated = models.DateTimeField(auto_now=True)   #saves time when model is updated

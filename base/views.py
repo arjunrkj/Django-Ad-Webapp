@@ -83,7 +83,6 @@ def home(request):
         Q(host__username__icontains=q) |
         Q(category__icontains=q) |
         Q(state__icontains=q) |
-        Q(district__icontains=q) |
         (Q(city__icontains=q) & Q(title__icontains=q)) |
         (Q(category__icontains=q) & Q(city__icontains=q))
 
