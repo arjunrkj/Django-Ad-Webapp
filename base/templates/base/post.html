@@ -41,16 +41,23 @@
               {%endif%}
               {% if post.contact|slice:"-10:" == '@gmail.com' %}
               <span class="room__topics">
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{post.contact}}" target="_blank">{{post.contact}}</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{post.contact}}" target="_blank">{{post.contact}}</a></span>
+                {%else%}
+                <span class="room__topics">
+                  <a>{{post.contact}}</a>
+                </span>
+                {%endif%}
+                
+                <!-- {%if post.image%}
 
-            {%else%}
-            <span class="room__topics">
-              <a>{{post.contact}}</a>
-          </span>
-          {%endif%}
+               <div class="post__image">
+                  <img src="{{post.image.url}}"/>
+               </div>
+               {%endif%} -->
 
+
+          
             
-
           
             </div>
            

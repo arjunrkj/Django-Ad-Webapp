@@ -20,6 +20,7 @@ class Post(models.Model):
     contact = models.TextField(null=False)  
     updated = models.DateTimeField(auto_now=True)   #saves time when model is updated
     created = models.DateTimeField(auto_now_add=True) #saves time when model is created (only one time)
+    # image = models.ImageField(null=True,default="")
 
     class Meta:
         ordering = [Random()]
