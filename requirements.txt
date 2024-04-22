@@ -6,7 +6,7 @@ django-crispy-forms==2.1
 filelock==3.13.1
 Pillow==10.0.1
 platformdirs==3.11.0
-psycopg2==2.9.9
+psycopg2-binary==2.9.9
 python-decouple==3.8
 sqlparse==0.4.4
 typing-extensions==4.8.0
