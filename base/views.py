@@ -75,16 +75,17 @@ def registeruser(request):
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    posts=Post.objects.filter(
-        Q(city__icontains=q) | 
-        Q(title__icontains=q) | 
-        Q(location__icontains=q) |
-        Q(description__icontains=q) |
-        Q(host__username__icontains=q) |
-        Q(category__icontains=q) |
-        Q(state__icontains=q) |
+    posts = Post.objects.filter(
+    Q(city__icontains=q) |
+    Q(title__icontains=q) |
+    Q(location__icontains=q) |
+    Q(description__icontains=q) |
+    Q(host__username__icontains=q) |
+    Q(category__icontains=q) |
+    Q(state__icontains=q) |
         (Q(city__icontains=q) & Q(title__icontains=q)) |
-        (Q(category__icontains=q) & Q(city__icontains=q))
+        (Q(city__icontains=q) & Q(category__icontains=q))
+        
 
     )
 
